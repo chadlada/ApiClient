@@ -16,9 +16,11 @@ namespace ApiClient
             var responseAsStream = await client.GetStreamAsync(url);
             var brews = await JsonSerializer.DeserializeAsync<List<Brewery>>(responseAsStream);
 
+            // *****Need to get to bottom of this!*********
             // var table = new ConsoleTable("Name", "City", "State", "Website");
             // table.AddRow(brews.Name, brews.City, brews.State, brews.Website);
             // table.Write();
+
             Console.WriteLine("Breweries in San Diego: ");
             foreach (var brew in brews)
             {
@@ -33,10 +35,21 @@ namespace ApiClient
             var responseAsStream = await client.GetStreamAsync(url);
             var brews = await JsonSerializer.DeserializeAsync<List<Brewery>>(responseAsStream);
 
-            Console.WriteLine("Breweries in San Diego: ");
+            Console.WriteLine("Breweries in Florida: ");
             foreach (var brew in brews)
             {
                 Console.WriteLine($"{brew.Name}");
+            }
+
+            var url2 = "https://api.openbrewerydb.org/breweries?by_state=texas";
+            var responseAsStream2 = await client.GetStreamAsync(url2);
+            var brews2 = await JsonSerializer.DeserializeAsync<List<Brewery>>(responseAsStream2);
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("Breweries in Texas: ");
+            foreach (var brew2 in brews2)
+            {
+                Console.WriteLine($"{brew2.Name}");
             }
         }
         static string Menu()
