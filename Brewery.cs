@@ -1,22 +1,36 @@
 using System;
+using System.Text.Json.Serialization;
 
 namespace ApiClient
 {
     public class Brewery
     {
-        public string id { get; set; }
-        public string name { get; set; }
-        public string brewery_type { get; set; }
-        public string street { get; set; }
-        public string city { get; set; }
-        public string state { get; set; }
-        public string county_province { get; set; }
-        public string postal_code { get; set; }
-        public string country { get; set; }
-        public string longitude { get; set; }
-        public string latitude { get; set; }
-        public string phone { get; set; }
-        public string website_url { get; set; }
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+        [JsonPropertyName("brewery_type")]
+        public string BreweryType { get; set; }
+        [JsonPropertyName("street")]
+        public string Street { get; set; }
+        [JsonPropertyName("city")]
+        public string City { get; set; }
+        [JsonPropertyName("state")]
+        public string State { get; set; }
+        [JsonPropertyName("county_province")]
+        public string County { get; set; }
+        [JsonPropertyName("postal_code")]
+        public string PostalCode { get; set; }
+        [JsonPropertyName("country")]
+        public string Country { get; set; }
+        [JsonPropertyName("longitude")]
+        public string Longitude { get; set; }
+        [JsonPropertyName("latitude")]
+        public string Latitude { get; set; }
+        [JsonPropertyName("phone")]
+        public string Phone { get; set; }
+        [JsonPropertyName("website_url")]
+        public string Website { get; set; }
     }
 }
 
