@@ -17,15 +17,15 @@ namespace ApiClient
             var brews = await JsonSerializer.DeserializeAsync<List<Brewery>>(responseAsStream);
 
             // *****Need to get to bottom of this!*********
-            // var table = new ConsoleTable("Name", "City", "State", "Website");
-            // table.AddRow(brews.Name, brews.City, brews.State, brews.Website);
-            // table.Write();
+            var table = new ConsoleTable("Name", "City", "State", "Website");
 
             Console.WriteLine("Breweries in San Diego: ");
             foreach (var brew in brews)
             {
-                Console.WriteLine($"{brew.Name}");
+                table.AddRow(brew.Name, brew.City, brew.State, brew.Website);
+                // Console.WriteLine($"{brew.Name}\nAddress:{brew.Street}\n");
             }
+            table.Write();
         }
 
         static async void GetAllBreweriesByState()
