@@ -12,14 +12,15 @@ namespace ApiClient
         static async Task GetListOfAllBreweriesByCity()
         {
             var client = new HttpClient();
-            var url = "https://api.openbrewerydb.org/breweries?by_city=san_diego";
+            Console.Write("Enter the name of the city you'd like to search for: ");
+            var cityResponse = Console.ReadLine();
+            var url = $"https://api.openbrewerydb.org/breweries?by_city={cityResponse}";
             var responseAsStream = await client.GetStreamAsync(url);
             var brews = await JsonSerializer.DeserializeAsync<List<Brewery>>(responseAsStream);
 
-            // *****Need to get to bottom of this!*********
             var table = new ConsoleTable("Name", "City", "State", "Website");
 
-            Console.WriteLine("Breweries in San Diego: ");
+            Console.WriteLine($"Breweries in {cityResponse}: ");
             foreach (var brew in brews)
             {
                 table.AddRow(brew.Name, brew.City, brew.State, brew.Website);
@@ -31,26 +32,19 @@ namespace ApiClient
         static async Task GetAllBreweriesByState()
         {
             var client = new HttpClient();
-            var url = "https://api.openbrewerydb.org/breweries?by_state=florida";
+            Console.Write("Enter the name of the state you'd like to search for: \n");
+            var stateResponse = Console.ReadLine();
+            var url = $"https://api.openbrewerydb.org/breweries?by_state={stateResponse}";
             var responseAsStream = await client.GetStreamAsync(url);
             var brews = await JsonSerializer.DeserializeAsync<List<Brewery>>(responseAsStream);
 
-            Console.WriteLine("Breweries in Florida: ");
+            Console.WriteLine($"Breweries in {stateResponse}: \n");
             foreach (var brew in brews)
             {
                 Console.WriteLine($"{brew.Name}");
             }
 
-            var url2 = "https://api.openbrewerydb.org/breweries?by_state=texas";
-            var responseAsStream2 = await client.GetStreamAsync(url2);
-            var brews2 = await JsonSerializer.DeserializeAsync<List<Brewery>>(responseAsStream2);
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("Breweries in Texas: ");
-            foreach (var brew2 in brews2)
-            {
-                Console.WriteLine($"{brew2.Name}");
-            }
+
         }
         static string Menu()
         {
