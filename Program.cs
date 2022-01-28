@@ -9,7 +9,7 @@ namespace ApiClient
 {
     class Program
     {
-        static async void GetListOfAllBreweriesByCity()
+        static async Task GetListOfAllBreweriesByCity()
         {
             var client = new HttpClient();
             var url = "https://api.openbrewerydb.org/breweries?by_city=san_diego";
@@ -28,7 +28,7 @@ namespace ApiClient
             table.Write();
         }
 
-        static async void GetAllBreweriesByState()
+        static async Task GetAllBreweriesByState()
         {
             var client = new HttpClient();
             var url = "https://api.openbrewerydb.org/breweries?by_state=florida";
@@ -64,7 +64,7 @@ namespace ApiClient
             return choice;
         }
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var keepBrewing = true;
             while (keepBrewing)
@@ -74,14 +74,14 @@ namespace ApiClient
                 switch (menuSelection)
                 {
                     case "1":
-                        GetListOfAllBreweriesByCity();
+                        await GetListOfAllBreweriesByCity();
                         Console.WriteLine("\nPress ENTER after viewing to quit to menu\n");
                         var userInput = Console.ReadLine();
                         Console.Clear();
                         break;
 
                     case "2":
-                        GetAllBreweriesByState();
+                        await GetAllBreweriesByState();
                         Console.WriteLine("\nPress ENTER after viewing to quit to menu\n");
                         var userInput2 = Console.ReadLine();
                         Console.Clear();
