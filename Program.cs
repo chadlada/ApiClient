@@ -37,13 +37,16 @@ namespace ApiClient
             var url = $"https://api.openbrewerydb.org/breweries?by_state={stateResponse}";
             var responseAsStream = await client.GetStreamAsync(url);
             var brews = await JsonSerializer.DeserializeAsync<List<Brewery>>(responseAsStream);
+            var table = new ConsoleTable("Name", "City", "State", "Website");
+
 
             Console.WriteLine($"Breweries in {stateResponse}: \n");
             foreach (var brew in brews)
             {
-                Console.WriteLine($"{brew.Name}");
+                table.AddRow(brew.Name, brew.City, brew.State, brew.Website);
+                // Console.WriteLine($"{brew.Name}");
             }
-
+            table.Write();
 
         }
         static string Menu()
